@@ -1,0 +1,171 @@
+// Tunnel Grid Background
+// Retro-futuristic 3D rotating wireframe grid tunnel
+
+.tunnel-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  perspective: 1000px;
+  background: var(--bg-black);
+
+  // Grid container
+  .grid-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%) rotateX(60deg);
+    animation: tunnelRotate 25s linear infinite;
+    will-change: transform;
+  }
+
+  // Grid lines - horizontal (enhanced visibility)
+  .grid-line-h {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 255, 136, 0.15) 20%,
+      rgba(0, 255, 136, 0.25) 50%,
+      rgba(0, 255, 136, 0.15) 80%,
+      transparent 100%
+    );
+    box-shadow: 0 0 4px rgba(0, 255, 136, 0.4);
+    transform-origin: center;
+
+    // Create multiple lines with different positions
+    @for $i from 1 through 20 {
+      &:nth-child(#{$i}) {
+        top: #{$i * 5%};
+        opacity: #{1 - ($i * 0.03)};
+        animation: lineGlow 4s ease-in-out infinite;
+        animation-delay: #{$i * 0.1s};
+      }
+    }
+  }
+
+  // Grid lines - vertical (enhanced visibility)
+  .grid-line-v {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 255, 136, 0.15) 20%,
+      rgba(0, 255, 136, 0.25) 50%,
+      rgba(0, 255, 136, 0.15) 80%,
+      transparent 100%
+    );
+    box-shadow: 0 0 4px rgba(0, 255, 136, 0.4);
+    transform-origin: center;
+
+    @for $i from 1 through 16 {
+      &:nth-child(#{$i + 20}) {
+        left: #{$i * 6.25%};
+        opacity: #{1 - ($i * 0.04)};
+        animation: lineGlow 4s ease-in-out infinite;
+        animation-delay: #{$i * 0.15s};
+      }
+    }
+  }
+
+  // Distant glow at vanishing point (more vibrant)
+  .distant-glow {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 80%;
+    height: 60%;
+    max-width: 800px;
+    max-height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 136, 0.35) 0%,
+      rgba(0, 255, 136, 0.2) 30%,
+      rgba(0, 255, 136, 0.08) 60%,
+      transparent 80%
+    );
+    filter: blur(80px);
+    animation: distantPulse 4s ease-in-out infinite;
+    will-change: opacity, transform;
+  }
+}
+
+// Rotation animation - creates tunnel effect (slower)
+@keyframes tunnelRotate {
+  0% {
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(360deg);
+  }
+}
+
+// Parallax effect on scroll (add to body or use JS to control)
+@media (prefers-reduced-motion: no-preference) {
+  .tunnel-grid {
+    transition: opacity 0.3s ease;
+  }
+}
+
+// Line glow animation (brighter)
+@keyframes lineGlow {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// Distant glow pulse (more prominent)
+@keyframes distantPulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translate(-50%, 50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, 50%) scale(1.15);
+  }
+}
+
+// Simpler grid for mobile (performance)
+@media only screen and (max-width: 768px) {
+  .tunnel-grid {
+    .grid-line-h,
+    .grid-line-v {
+      &:nth-child(n + 11) {
+        display: none; // Hide extra grid lines on mobile
+      }
+    }
+
+    .distant-glow {
+      width: 200px;
+      height: 200px;
+    }
+  }
+}
+
+// Hide on very small screens to improve performance
+@media only screen and (max-width: 480px) {
+  .tunnel-grid {
+    opacity: 0.3; // Reduce visibility on small screens
+  }
+}

@@ -1,0 +1,599 @@
+// Experience Timeline Section - Enhanced Modern Design
+.experience {
+  padding: 10rem 4rem;
+  background: var(--bg-black);
+  position: relative;
+  overflow: hidden;
+
+  // Animated background grid
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+      linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.3;
+    animation: gridMove 20s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes gridMove {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(50px, 50px);
+    }
+  }
+
+  // Glowing orb effect
+  &::after {
+    content: "";
+    position: absolute;
+    top: 20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(100px);
+    animation: orbFloat 15s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes orbFloat {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-100px, 50px) scale(1.1);
+    }
+  }
+
+  // Binary Rain Effect (Left Side)
+  .binary-rain {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.15;
+
+    @media (max-width: 768px) {
+      width: 100px;
+      opacity: 0.1;
+    }
+
+    @media (max-width: 480px) {
+      display: none;
+    }
+
+    .binary-column {
+      position: absolute;
+      top: -100%;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 14px;
+      color: var(--neon-green);
+      line-height: 1.5;
+      text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+      animation: binaryFall linear infinite;
+      white-space: pre;
+
+      @media (max-width: 768px) {
+        font-size: 12px;
+      }
+
+      // Generate 8 columns
+      @for $i from 1 through 8 {
+        &:nth-child(#{$i}) {
+          left: #{($i - 1) * 25}px;
+          animation-duration: #{4 + random(4)}s;
+          animation-delay: #{random(4) * -1}s;
+        }
+      }
+    }
+
+    @keyframes binaryFall {
+      0% {
+        top: -100%;
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        top: 100%;
+        opacity: 0;
+      }
+    }
+  }
+
+  // Section Header
+  .experience-header {
+    text-align: center;
+    margin-bottom: 5rem;
+    position: relative;
+    z-index: 2;
+
+    h5 {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--neon-green);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+
+      &::before,
+      &::after {
+        content: "//";
+        position: absolute;
+        color: var(--neon-green);
+        opacity: 0.5;
+      }
+
+      &::before {
+        left: -2rem;
+      }
+
+      &::after {
+        right: -2rem;
+      }
+    }
+
+    h2 {
+      font-family: "Space Mono", monospace;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--text-light) 0%, var(--neon-green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 3px;
+      margin: 0;
+      text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+    }
+  }
+
+  // Timeline Container
+  .timeline {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 7rem;
+    position: relative;
+    z-index: 2;
+    perspective: 1000px;
+    perspective-origin: center center;
+
+    @media (max-width: 768px) {
+      padding-left: 4rem;
+    }
+
+    // Refined vertical timeline line - Subtle glow
+    &::before {
+      content: "";
+      position: absolute;
+      left: 2.5rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 255, 136, 0.7) 0%,
+        rgba(212, 175, 55, 0.6) 50%,
+        rgba(0, 255, 136, 0.7) 100%
+      );
+      box-shadow:
+        0 0 6px rgba(0, 255, 136, 0.3),
+        0 0 12px rgba(0, 255, 136, 0.15);
+      z-index: 1;
+      animation: timelineGlow 4s ease-in-out infinite;
+
+      @media (max-width: 768px) {
+        left: 1rem;
+      }
+    }
+
+    @keyframes timelineGlow {
+      0%, 100% {
+        box-shadow:
+          0 0 6px rgba(0, 255, 136, 0.3),
+          0 0 12px rgba(0, 255, 136, 0.15);
+      }
+      50% {
+        box-shadow:
+          0 0 8px rgba(0, 255, 136, 0.4),
+          0 0 16px rgba(0, 255, 136, 0.2);
+      }
+    }
+
+    // Simple scroll-following indicator line
+    &::after {
+      content: "";
+      position: absolute;
+      left: calc(2.5rem - 1px);
+      top: 0;
+      width: 3px;
+      height: 80px;
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        var(--neon-green) 30%,
+        var(--neon-green) 70%,
+        transparent 100%
+      );
+      box-shadow: 0 0 8px var(--neon-green);
+      z-index: 3;
+      animation: scrollFollow 3s ease-in-out infinite;
+      border-radius: 2px;
+
+      @media (max-width: 768px) {
+        left: calc(1rem - 1px);
+        height: 60px;
+      }
+    }
+
+    @keyframes scrollFollow {
+      0% {
+        top: 0%;
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        top: calc(100% - 80px);
+        opacity: 0;
+      }
+    }
+  }
+
+  // Timeline Item
+  .timeline-item {
+    position: relative;
+    margin-bottom: 4rem;
+    animation: slideInRight 0.6s ease-out backwards;
+
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    // Chevron indicator instead of dot
+    .timeline-dot {
+      position: absolute;
+      left: -3.5rem;
+      top: 1rem;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+
+      @media (max-width: 768px) {
+        left: -2rem;
+      }
+
+      // Chevron symbol ">"
+      &::before {
+        content: ">";
+        font-family: "JetBrains Mono", monospace;
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--neon-green);
+        text-shadow: 0 0 8px var(--neon-green);
+        animation: chevronPulse 2s ease-in-out infinite;
+      }
+
+      @keyframes chevronPulse {
+        0%, 100% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.15);
+          opacity: 1;
+        }
+      }
+    }
+
+    // Experience card - Glassmorphic design
+    .experience-card {
+      background: rgba(18, 18, 18, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+
+      // Holographic gradient overlay
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 255, 136, 0.1) 0%,
+          transparent 50%,
+          rgba(212, 175, 55, 0.1) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+      }
+
+      // Animated shine effect
+      &::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%
+        );
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        transition: transform 0.6s ease;
+      }
+
+      &:hover {
+        border-color: rgba(0, 255, 136, 0.6);
+        transform: translateX(12px) translateY(-8px);
+        box-shadow:
+          0 8px 32px rgba(0, 255, 136, 0.2),
+          0 0 0 1px rgba(0, 255, 136, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+        &::before {
+          opacity: 1;
+        }
+
+        &::after {
+          transform: translateX(100%) translateY(100%) rotate(45deg);
+        }
+
+        .card-header h3 {
+          color: var(--neon-green);
+          text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .company {
+          text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+        }
+      }
+
+      // Card header (flex row)
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 2rem;
+        margin-bottom: 0.75rem;
+        position: relative;
+        z-index: 1;
+
+        @media (max-width: 768px) {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        h3 {
+          font-family: "Space Mono", monospace;
+          font-size: 1.35rem;
+          font-weight: 600;
+          color: var(--text-light);
+          margin: 0;
+          flex: 1;
+          transition: all 0.3s ease;
+          letter-spacing: 0.5px;
+        }
+
+        .date {
+          font-family: "JetBrains Mono", monospace;
+          font-size: 0.875rem;
+          color: var(--rich-gold);
+          white-space: nowrap;
+          flex-shrink: 0;
+          padding: 0.25rem 0.75rem;
+          background: rgba(212, 175, 55, 0.1);
+          border-radius: 6px;
+          border: 1px solid rgba(212, 175, 55, 0.3);
+          font-weight: 500;
+        }
+      }
+
+      // Company name with animated underline
+      .company {
+        font-size: 1.1rem;
+        color: var(--neon-green);
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        position: relative;
+        display: inline-block;
+        z-index: 1;
+        transition: all 0.3s ease;
+        font-family: "JetBrains Mono", monospace;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, var(--neon-green), var(--rich-gold));
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.3s ease;
+        }
+      }
+
+      &:hover .company::after {
+        transform: scaleX(1);
+      }
+
+      // Bullet list with enhanced styling
+      ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 1.5rem 0 0 0;
+        position: relative;
+        z-index: 1;
+
+        li {
+          position: relative;
+          padding-left: 2rem;
+          margin-bottom: 1rem;
+          color: var(--text-medium);
+          line-height: 1.7;
+          font-size: 0.95rem;
+          transition: all 0.2s ease;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          // Animated custom bullet
+          &::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
+            font-size: 1.5rem;
+            line-height: 1.7;
+            transition: all 0.2s ease;
+          }
+
+          &:hover {
+            color: var(--text-light);
+            transform: translateX(4px);
+
+            &::before {
+              color: var(--rich-gold);
+              text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media only screen and (max-width: 768px) {
+  .experience {
+    padding: 6rem 2rem;
+
+    .experience-header {
+      margin-bottom: 3rem;
+
+      h5 {
+        &::before,
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    .timeline {
+      padding-left: 4rem;
+    }
+
+    .timeline-item {
+      margin-bottom: 3rem;
+
+      .timeline-dot {
+        left: -2.5rem;
+      }
+
+      .experience-card {
+        padding: 1.5rem;
+
+        &:hover {
+          transform: translateY(-4px);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .experience {
+    padding: 4rem 1.5rem;
+
+    .timeline {
+      padding-left: 3rem;
+
+      &::before {
+        left: 0.5rem;
+      }
+    }
+
+    .timeline-item {
+      .timeline-dot {
+        left: -2rem;
+        width: 12px;
+        height: 12px;
+      }
+
+      .experience-card {
+        padding: 1.25rem;
+
+        .card-header h3 {
+          font-size: 1.1rem;
+        }
+
+        .company {
+          font-size: 1rem;
+        }
+
+        ul li {
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+}

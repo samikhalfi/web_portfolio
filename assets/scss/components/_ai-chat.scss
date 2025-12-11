@@ -1,0 +1,629 @@
+// Terminal/CMD AI Chat Component
+// Retro command-line interface styled assistant
+
+// Terminal Color Variables
+$terminal-bg: #0C0C0C;
+$terminal-dark: #1a1a1a;
+$terminal-green: #00ff88;
+$terminal-text: #0ea5e9;
+$terminal-gold: #d4af37;
+$terminal-white: #f0f0f0;
+$terminal-gray: #808080;
+$terminal-error: #ff5555;
+
+// Floating Terminal Button (Bottom-Right)
+.ai-chat-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 64px;
+  height: 64px;
+  background: $terminal-bg;
+  border: 2px solid $terminal-green;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5),
+              0 0 40px rgba(0, 255, 136, 0.3),
+              inset 0 0 10px rgba(0, 255, 136, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  transition: all 0.3s ease;
+  animation: terminalPulse 2s infinite;
+  border-radius: 4px;
+
+  // Hidden initially until user reaches main page
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+
+  // Show when active
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  // Terminal icon
+  ion-icon {
+    font-size: 32px;
+    color: $terminal-green;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.8));
+  }
+
+  // Tooltip on hover
+  &::before {
+    content: "OPEN_TERMINAL.EXE";
+    position: absolute;
+    bottom: calc(100% + 12px);
+    right: 0;
+    background: $terminal-bg;
+    color: $terminal-green;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid $terminal-green;
+    font-size: 0.75rem;
+    font-family: "JetBrains Mono", "Courier New", monospace;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+    letter-spacing: 0.5px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.8),
+                0 0 60px rgba(0, 255, 136, 0.4),
+                inset 0 0 15px rgba(0, 255, 136, 0.2);
+
+    &::before {
+      opacity: 1;
+    }
+
+    ion-icon {
+      filter: drop-shadow(0 0 12px rgba(0, 255, 136, 1));
+    }
+  }
+
+  &.chat-open {
+    display: none;
+  }
+}
+
+// Pulse animation
+@keyframes terminalPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5),
+                0 0 40px rgba(0, 255, 136, 0.3),
+                inset 0 0 10px rgba(0, 255, 136, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.7),
+                0 0 60px rgba(0, 255, 136, 0.5),
+                inset 0 0 15px rgba(0, 255, 136, 0.2);
+  }
+}
+
+// Terminal Window Container
+.terminal-window {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 650px;
+  height: 550px;
+  background: $terminal-bg;
+  border: 2px solid $terminal-green;
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.4),
+              0 20px 60px rgba(0, 0, 0, 0.8),
+              inset 0 0 20px rgba(0, 255, 136, 0.05);
+  z-index: 10000;
+  display: none;
+  flex-direction: column;
+  animation: terminalBoot 0.5s ease-out;
+  border-radius: 2px;
+  font-family: "JetBrains Mono", "Courier New", monospace;
+
+  &.active {
+    display: flex;
+  }
+
+  @media (max-width: 768px) {
+    width: calc(100vw - 2rem);
+    height: calc(100vh - 4rem);
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: calc(100vw - 1rem);
+    height: calc(100vh - 1rem);
+  }
+}
+
+// Boot animation
+@keyframes terminalBoot {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Terminal Header (Windows CMD Style)
+.terminal-header {
+  background: $terminal-dark;
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px solid $terminal-green;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  box-shadow: 0 2px 10px rgba(0, 255, 136, 0.2);
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .terminal-icon {
+      font-size: 0.875rem;
+      color: $terminal-gold;
+      font-weight: 700;
+      text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+    }
+
+    .header-title {
+      font-size: 0.875rem;
+      color: $terminal-white;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .header-controls {
+    display: flex;
+    gap: 0.5rem;
+
+    .control-btn {
+      width: 28px;
+      height: 20px;
+      background: $terminal-dark;
+      border: 1px solid $terminal-gray;
+      color: $terminal-white;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      padding: 0;
+      line-height: 1;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: $terminal-white;
+      }
+
+      &.close:hover {
+        background: $terminal-error;
+        border-color: $terminal-error;
+        color: white;
+      }
+    }
+  }
+}
+
+// Terminal Body (Messages Area)
+.terminal-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem;
+  background: $terminal-bg;
+  color: $terminal-green;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  position: relative;
+
+  // CRT scanlines effect
+  .scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 0, 0, 0.1) 51%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1;
+    animation: scanlineMove 8s linear infinite;
+  }
+
+  @keyframes scanlineMove {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(4px);
+    }
+  }
+
+  // CRT glow overlay
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      rgba(0, 255, 136, 0.03) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  // Content wrapper
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $terminal-green;
+    box-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+
+    &:hover {
+      background: $terminal-gold;
+      box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+    }
+  }
+}
+
+// Boot Sequence Styling
+.boot-sequence {
+  .boot-line {
+    margin-bottom: 0.25rem;
+    color: $terminal-green;
+    animation: typeLine 0.05s steps(1);
+
+    &.terminal-prompt {
+      margin-top: 0.5rem;
+
+      .prompt-path {
+        color: $terminal-gold;
+        font-weight: 600;
+      }
+
+      .prompt-command {
+        color: $terminal-white;
+        margin-left: 0.5rem;
+      }
+    }
+
+    &.success-msg {
+      color: $terminal-green;
+      font-weight: 600;
+      text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+    }
+
+    &.info-msg {
+      color: $terminal-text;
+      font-weight: 300;
+    }
+
+    &.welcome-text {
+      color: $terminal-white;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    &.cmd-list {
+      color: $terminal-green;
+      padding-left: 1rem;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    &.hint-text {
+      color: $terminal-gray;
+      font-style: italic;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@keyframes typeLine {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Chat Messages (User/AI)
+.message {
+  margin-bottom: 1rem;
+  padding: 0;
+  max-width: 100%;
+  word-wrap: break-word;
+  color: $terminal-green;
+
+  &.user-message {
+    .message-line {
+      color: $terminal-white;
+
+      .prompt-path {
+        color: $terminal-gold;
+      }
+    }
+  }
+
+  &.ai-message {
+    .message-line {
+      color: $terminal-text;
+    }
+  }
+
+  .message-line {
+    margin-bottom: 0.15rem;
+  }
+}
+
+// Terminal Input Area
+.terminal-input {
+  border-top: 1px solid rgba(0, 255, 136, 0.3);
+  padding: 0.75rem;
+  background: $terminal-dark;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 -2px 10px rgba(0, 255, 136, 0.1);
+
+  .input-prompt {
+    color: $terminal-gold;
+    font-weight: 600;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+  }
+
+  input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: $terminal-white;
+    font-family: "JetBrains Mono", "Courier New", monospace;
+    font-size: 0.875rem;
+    outline: none;
+    letter-spacing: 0.3px;
+    caret-color: $terminal-green;
+    caret-shape: block;
+
+    &::placeholder {
+      color: $terminal-gray;
+      opacity: 0.6;
+    }
+
+    &::selection {
+      background: rgba(0, 255, 136, 0.3);
+      color: $terminal-white;
+    }
+  }
+
+  button {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 1px solid $terminal-green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+
+    ion-icon {
+      font-size: 18px;
+      color: $terminal-green;
+    }
+
+    &:hover {
+      background: rgba(0, 255, 136, 0.1);
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+
+      ion-icon {
+        color: $terminal-gold;
+      }
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+}
+
+// Typing Indicator (Loading)
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $terminal-text;
+  margin-bottom: 1rem;
+
+  .typing-text {
+    font-size: 0.875rem;
+  }
+
+  .typing-dots {
+    display: flex;
+    gap: 0.25rem;
+
+    span {
+      width: 4px;
+      height: 4px;
+      background: $terminal-green;
+      border-radius: 50%;
+      animation: typingDot 1.4s infinite ease-in-out;
+      box-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+
+      &:nth-child(1) {
+        animation-delay: 0s;
+      }
+
+      &:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+    }
+  }
+}
+
+@keyframes typingDot {
+  0%, 60%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  30% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+// Cursor blink effect
+@keyframes cursorBlink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  display: inline-block;
+  width: 8px;
+  height: 1rem;
+  background: $terminal-green;
+  margin-left: 2px;
+  animation: cursorBlink 1s infinite;
+  box-shadow: 0 0 5px rgba(0, 255, 136, 0.8);
+}
+
+// Responsive adjustments
+@media only screen and (max-width: 768px) {
+  .ai-chat-button {
+    bottom: 1rem;
+    right: 1rem;
+    width: 56px;
+    height: 56px;
+
+    ion-icon {
+      font-size: 28px;
+    }
+
+    &::before {
+      font-size: 0.7rem;
+    }
+  }
+
+  .terminal-header {
+    padding: 0.35rem 0.5rem;
+
+    .header-left {
+      .terminal-icon,
+      .header-title {
+        font-size: 0.75rem;
+      }
+    }
+
+    .header-controls {
+      .control-btn {
+        width: 24px;
+        height: 18px;
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  .terminal-body {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .terminal-input {
+    padding: 0.625rem;
+
+    .input-prompt {
+      font-size: 0.8rem;
+    }
+
+    input {
+      font-size: 0.8rem;
+    }
+
+    button {
+      width: 28px;
+      height: 28px;
+
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .terminal-header {
+    .header-left {
+      .header-title {
+        display: none;
+      }
+    }
+  }
+
+  .boot-sequence {
+    .boot-line {
+      font-size: 0.75rem;
+
+      &.welcome-text {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}

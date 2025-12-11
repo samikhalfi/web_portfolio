@@ -1,0 +1,284 @@
+// Scroll-based CSS Animations (Optimized)
+// Modern scroll-driven animations using CSS animation-timeline with performance improvements
+
+// Custom properties for animations
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+// About Section - Profile Image Animation
+.about {
+  .profile-img {
+    animation: imageFadeIn 1ms ease-out forwards;
+    animation-timeline: view(block);
+    animation-range: entry 0% contain 30%;
+    will-change: opacity;
+
+    img {
+      transition: transform 0.3s ease;
+    }
+  }
+
+  .about-content {
+    animation: slideInRight 1ms ease-out forwards;
+    animation-timeline: view(block);
+    animation-range: entry 10% contain 40%;
+    will-change: transform, opacity;
+  }
+}
+
+// Services Section - Card Animation
+.services {
+  .service-item {
+    --index: 0;
+
+    &:nth-child(1) { --index: 1; }
+    &:nth-child(2) { --index: 2; }
+    &:nth-child(3) { --index: 3; }
+
+    --entry-start: 0%;
+    --entry-step: 10%;
+    --entry: calc(var(--entry-start) + (var(--index) - 1) * var(--entry-step));
+
+    animation: serviceCardUp 1ms ease-out both;
+    animation-timeline: view(block);
+    animation-range: entry var(--entry) contain 60%;
+    will-change: transform, opacity;
+
+    ion-icon {
+      animation: iconRotate 1ms ease-out forwards;
+      animation-timeline: view(block);
+      animation-range: entry var(--entry) contain 65%;
+      will-change: transform, opacity;
+    }
+  }
+}
+
+// Portfolio Section - Project Cards Animation (Optimized)
+.project {
+  h5, h2 {
+    animation: titleSlideIn 1ms ease-out forwards;
+    animation-timeline: view(block);
+    animation-range: entry 0% contain 25%;
+    will-change: transform, opacity;
+  }
+
+  .project-item-container {
+    .project-box {
+      --box-index: 0;
+
+      &:nth-child(1) { --box-index: 1; }
+      &:nth-child(2) { --box-index: 2; }
+      &:nth-child(3) { --box-index: 3; }
+      &:nth-child(4) { --box-index: 4; }
+      &:nth-child(5) { --box-index: 5; }
+      &:nth-child(6) { --box-index: 6; }
+      &:nth-child(7) { --box-index: 7; }
+      &:nth-child(8) { --box-index: 8; }
+
+      --entry-start: 5%;
+      --entry-step: 8%;
+      --project-entry: calc(var(--entry-start) + (var(--box-index) - 1) * var(--entry-step));
+
+      animation: projectCardFade 1ms ease-out both;
+      animation-timeline: view(block);
+      animation-range: entry var(--project-entry) contain 50%;
+
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+
+      // Animated spinning gradient border on hover
+      &::before {
+        content: "";
+        position: absolute;
+        width: 104%;
+        height: 102%;
+        border-radius: 8px;
+        background-image: linear-gradient(
+          var(--rotate),
+          var(--gradientStart),
+          var(--gradientMid) 43%,
+          var(--gradientEnd)
+        );
+        z-index: -1;
+        top: -1%;
+        left: -2%;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        will-change: transform;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 33%;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        margin: 0 auto;
+        transform: scale(0.8);
+        filter: blur(50px);
+        background-image: linear-gradient(
+          var(--rotate),
+          var(--gradientStart),
+          var(--gradientMid) 43%,
+          var(--gradientEnd)
+        );
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        will-change: transform;
+      }
+
+      &:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+        &::before,
+        &::after {
+          opacity: 1;
+          animation: spin 2.5s linear infinite;
+        }
+      }
+    }
+  }
+}
+
+// Contact Section - Form Animation
+.contact {
+  .contact-title {
+    animation: titleSlideIn 1ms ease-out forwards;
+    animation-timeline: view(block);
+    animation-range: entry 0% contain 30%;
+    will-change: transform, opacity;
+  }
+
+  form {
+    animation: formFadeIn 1ms ease-out forwards;
+    animation-timeline: view(block);
+    animation-range: entry 20% contain 50%;
+    will-change: opacity;
+  }
+}
+
+// Footer Animation
+.footer {
+  animation: footerSlideUp 1ms ease-out forwards;
+  animation-timeline: view(block);
+  animation-range: entry 0% contain 40%;
+  will-change: transform, opacity;
+}
+
+// Keyframe Animations
+
+@keyframes imageFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes serviceCardUp {
+  from {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes iconRotate {
+  from {
+    transform: rotate(-180deg) scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+
+@keyframes projectCardFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes titleSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes formFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+@keyframes footerSlideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+  100% {
+    --rotate: 360deg;
+  }
+}
+
+// Fallback for browsers that don't support scroll-driven animations
+@supports not (animation-timeline: view()) {
+  .about .profile-img,
+  .about .about-content,
+  .services .service-item,
+  .project .project-box,
+  .contact .contact-title,
+  .contact form,
+  .footer {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

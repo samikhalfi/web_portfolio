@@ -1,0 +1,197 @@
+// Code Window Component
+// macOS-style terminal window with syntax highlighting
+
+.code-window {
+  position: relative;
+  background: var(--bg-darker);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 255, 136, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  // Window chrome (macOS dots)
+  .window-chrome {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(10, 10, 10, 0.8);
+    border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      opacity: 0.9;
+
+      &.red {
+        background: #ff5f56;
+        box-shadow: 0 0 8px rgba(255, 95, 86, 0.5);
+      }
+
+      &.yellow {
+        background: #ffbd2e;
+        box-shadow: 0 0 8px rgba(255, 189, 46, 0.5);
+      }
+
+      &.green {
+        background: #27c93f;
+        box-shadow: 0 0 8px rgba(39, 201, 63, 0.5);
+      }
+    }
+  }
+
+  // Code content
+  pre {
+    margin: 0;
+    padding: 20px 24px;
+    overflow-x: auto;
+    background: transparent;
+
+    code {
+      font-family: "JetBrains Mono", "Courier New", monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-light);
+      display: block;
+      white-space: pre;
+
+      // Syntax highlighting - Exact specification
+      .keyword {
+        color: #c678dd; // Purple for keywords (class, def, while, True)
+        font-weight: 500;
+      }
+
+      .class-name {
+        color: #8be9fd; // Cyan for classes
+        font-weight: 600;
+      }
+
+      .function {
+        color: #e5c07b; // Yellow for functions (__init__, innovate, learn, build, deploy)
+      }
+
+      .string {
+        color: #98c379; // Green for strings ("Sami Khalfi", "Data Scientist", etc.)
+      }
+
+      .property {
+        color: #abb2bf; // White for self
+      }
+
+      .comment {
+        color: var(--text-dark); // Dark gray for comments
+        font-style: italic;
+      }
+
+      .operator {
+        color: var(--neon-green); // Green for operators
+      }
+
+      .number {
+        color: #ff6b9d; // Light pink for numbers
+      }
+    }
+  }
+
+  // Subtle scan line effect for retro feel
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 136, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0, 255, 136, 0.03) 3px
+    );
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  // Scrollbar styling
+  pre::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  pre::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  pre::-webkit-scrollbar-thumb {
+    background: var(--neon-green);
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--rich-gold);
+    }
+  }
+}
+
+// Tech pills component (used below code window)
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+
+  .tech-pill {
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 20px;
+    color: var(--text-medium);
+    font-family: "Space Mono", monospace;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: default;
+
+    &:hover {
+      border-color: var(--neon-green);
+      color: var(--neon-green);
+      background: rgba(0, 255, 136, 0.05);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 255, 136, 0.2);
+    }
+  }
+}
+
+// Responsive adjustments
+@media only screen and (max-width: 768px) {
+  .code-window {
+    pre code {
+      font-size: 12px;
+    }
+  }
+
+  .tech-pills {
+    gap: 8px;
+
+    .tech-pill {
+      padding: 6px 12px;
+      font-size: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .code-window {
+    pre {
+      padding: 16px;
+    }
+
+    pre code {
+      font-size: 11px;
+    }
+  }
+}

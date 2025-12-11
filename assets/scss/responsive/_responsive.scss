@@ -1,0 +1,583 @@
+@media screen and (max-width: 900px) {
+  .about {
+    padding: 2rem 2rem !important;
+  }
+
+  // Header adjustments for tablets
+  header .landing-text {
+    h1 {
+      font-size: 7rem !important;
+    }
+    p {
+      font-size: 0.85rem;
+      padding: 0 2rem;
+    }
+  }
+
+  // Services section for tablets
+  .services {
+    .expertise-container {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-gap: 32px;
+      padding: 0 1.5rem;
+    }
+  }
+
+  // Projects section for tablets
+  .project {
+    padding: 4rem 1.5rem;
+
+    &-item-container {
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      grid-gap: 3rem;
+    }
+  }
+
+  // macOS dock adjustments
+  .dock {
+    bottom: 1rem;
+
+    .dock-container {
+      padding: 0.5rem;
+      gap: 0.8rem;
+    }
+  }
+
+  // Menu bar adjustments
+  .menu-bar {
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    .landing-text {
+      h1 {
+        font-size: 5rem !important;
+        padding: 2rem !important;
+      }
+      p {
+        font-size: 0.8rem;
+        padding: 0 1.5rem;
+      }
+    }
+    .nav-list {
+      margin-top: 2.5rem;
+      flex-direction: column;
+      li {
+        margin: 1rem 0;
+        .nav-link {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+
+  // Services section - better mobile layout
+  .services {
+    margin: 4rem 0 !important;
+    padding: 3rem 0 !important;
+
+    .services-content {
+      padding: 0 1rem;
+
+      .services-heading {
+        margin-bottom: 4rem;
+      }
+    }
+
+    .expertise-container {
+      grid-template-columns: 1fr;
+      grid-gap: 24px;
+      padding: 0 1rem;
+    }
+
+    .expertise-card {
+      padding: 48px 20px 20px 20px;
+      min-height: auto;
+
+      .icon {
+        padding: 10px;
+
+        svg {
+          width: 28px;
+          height: 28px;
+        }
+      }
+
+      h4 {
+        font-size: 1.1rem;
+        margin: 12px 0 6px 0;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  // Projects section - better mobile layout
+  .project {
+    padding: 4rem 1rem;
+
+    &-item-container {
+      grid-template-columns: 1fr;
+      grid-gap: 2.5rem;
+      margin: 4rem auto 0 auto;
+    }
+
+    &-box {
+      height: auto;
+      min-height: 16rem;
+      padding: 1.5rem;
+      gap: 2rem;
+
+      &__content {
+        h3 {
+          font-size: 1.3rem;
+          margin-bottom: 2rem;
+          line-height: 1.8rem;
+        }
+
+        h5 {
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .projects-switch-container {
+      margin: 1.5rem 0 2rem 0;
+    }
+
+    h2 {
+      font-size: 1.8rem !important;
+    }
+  }
+
+  .portfolio {
+    margin-top: 12rem;
+  }
+
+  .about-heading,
+  .services-heading,
+  .contact-title {
+    h2 {
+      font-size: 1.5rem !important;
+    }
+  }
+
+  // Dock - hide on smaller tablets/mobile
+  .dock {
+    display: none;
+  }
+
+  // Menu bar adjustments
+  .menu-bar {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+
+    .left {
+      .menus {
+        margin-right: 0.8rem;
+      }
+    }
+
+    .right {
+      gap: 0.5rem;
+    }
+  }
+
+  .more-about {
+    &-content {
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+    &-img,
+    &-text {
+      width: 100% !important;
+      margin: 2rem auto;
+    }
+  }
+  .cursor-effect {
+    display: none;
+  }
+
+  .about .container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    .profile-img {
+      // width: 90%;
+      margin-bottom: 2.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  // Header - even smaller for mobile
+  header {
+    .landing-text {
+      h1 {
+        font-size: 3.5rem !important;
+        padding: 1.5rem !important;
+        letter-spacing: 2px;
+      }
+      p {
+        font-size: 0.75rem;
+        padding: 0 1rem;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  .nav-list {
+    margin-top: -1rem !important;
+    .nav-link {
+      font-size: 3.5rem !important;
+    }
+  }
+
+  .menu-toggler {
+    top: 2.2rem;
+    right: 1rem;
+    width: 1.5rem;
+    height: 1rem;
+  }
+
+  // Menu bar - compact on mobile
+  .menu-bar {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+
+    .left {
+      .menus {
+        margin-right: 0.5rem;
+
+        &:nth-child(3),
+        &:nth-child(4) {
+          display: none; // Hide last two menu items on very small screens
+        }
+      }
+    }
+  }
+
+  .about {
+    margin-top: 9rem !important;
+    .container {
+      flex-direction: column;
+      .profile-img {
+        margin: 0 2rem 4rem 1rem;
+      }
+    }
+  }
+
+  .logo {
+    top: 2.2rem;
+    left: 1rem;
+    width: 4rem !important;
+    padding: 0.6rem 0.3rem !important;
+    h2 {
+      font-size: 1.2rem !important;
+    }
+  }
+
+  // Services section - mobile optimized
+  .services {
+    margin: 3rem 0 !important;
+    padding: 2rem 0 !important;
+
+    .services-content {
+      padding: 0 0.75rem;
+
+      .services-heading {
+        margin-bottom: 3rem;
+
+        h5 {
+          font-size: 0.7rem;
+          letter-spacing: 2px;
+        }
+
+        h2 {
+          font-size: 1.5rem !important;
+        }
+      }
+    }
+
+    .expertise-container {
+      grid-gap: 20px;
+      padding: 0 0.75rem;
+    }
+
+    .expertise-card {
+      padding: 40px 16px 16px 16px;
+
+      .icon {
+        padding: 8px;
+
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      h4 {
+        font-size: 1rem;
+        margin: 10px 0 6px 0;
+      }
+
+      p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  // Projects section - mobile optimized
+  .project {
+    padding: 3rem 0.75rem !important;
+
+    h2 {
+      font-size: 1.5rem !important;
+    }
+
+    h5 {
+      font-size: 0.7rem !important;
+      letter-spacing: 2px;
+    }
+
+    &-item-container {
+      grid-gap: 2rem;
+      margin: 3rem auto 0 auto;
+    }
+
+    &-box {
+      min-height: 14rem;
+      padding: 1.25rem;
+
+      &__content {
+        h3 {
+          font-size: 1.1rem;
+          margin-bottom: 1.5rem;
+          line-height: 1.6rem;
+        }
+
+        h5 {
+          font-size: 0.8rem;
+          letter-spacing: 0;
+        }
+      }
+
+      &__link {
+        a ion-icon {
+          width: 30px;
+          height: 22px;
+        }
+      }
+    }
+
+    .projects-switch-container {
+      margin: 1rem 0 2rem 0;
+    }
+
+    .projects-switch {
+      font-size: 14px;
+    }
+  }
+
+  .contact .container {
+    padding: 0px 20px !important;
+    form {
+      width: 100% !important;
+      min-width: 0 !important;
+      .input-row {
+        flex-direction: column;
+        .side {
+          width: 100% !important;
+          margin-bottom: 50px;
+        }
+      }
+      .textarea {
+        margin-top: 0 !important;
+      }
+    }
+  }
+
+  .sub {
+    font-size: 0.9rem !important;
+    margin: 0px 0 60px !important;
+  }
+
+  .about-content {
+    p {
+      margin-top: 0rem !important;
+      font-size: 0.8rem !important;
+    }
+  }
+
+  .contact-title {
+    padding: 6rem 2rem 2rem 6rem !important;
+  }
+
+
+  .effect-3 {
+    top: 12rem !important;
+    left: 5rem !important;
+  }
+
+  .inner {
+    top: 1rem !important;
+    max-width: 220px !important;
+    padding: 1rem;
+    span {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 350px) {
+  header {
+    .landing-text {
+      flex-direction: column;
+      h1 {
+        font-size: 2.8rem !important;
+        padding: 1rem !important;
+        letter-spacing: 1px;
+      }
+      p {
+        font-size: 0.7rem;
+        padding: 0 0.75rem;
+      }
+    }
+  }
+
+  .profile-img {
+    max-width: 400px;
+  }
+
+  // Services for very small screens
+  .services {
+    .services-content {
+      .services-heading {
+        h2 {
+          font-size: 1.2rem !important;
+        }
+        h5 {
+          font-size: 0.65rem;
+        }
+      }
+    }
+
+    .expertise-card {
+      padding: 32px 12px 12px 12px;
+
+      .icon {
+        padding: 6px;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      h4 {
+        font-size: 0.95rem;
+      }
+
+      p {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  // Projects for very small screens
+  .project {
+    padding: 2rem 0.5rem !important;
+
+    h2 {
+      font-size: 1.2rem !important;
+    }
+
+    h5 {
+      font-size: 0.65rem !important;
+    }
+
+    &-box {
+      padding: 1rem;
+      min-height: 12rem;
+
+      &__content {
+        h3 {
+          font-size: 1rem;
+          margin-bottom: 1.25rem;
+          line-height: 1.4rem;
+        }
+
+        h5 {
+          font-size: 0.75rem;
+        }
+      }
+    }
+  }
+
+  .services-content p,
+  .about-content {
+    font-size: 0.6rem;
+  }
+
+  .menu-bar {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  header {
+    .landing-text {
+      h1 {
+        font-size: 2.5rem !important;
+      }
+    }
+  }
+
+  .services {
+    .services-heading h2 {
+      font-size: 1rem !important;
+    }
+
+    .expertise-card {
+      h4 {
+        font-size: 0.9rem;
+      }
+
+      p {
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  .project {
+    h2 {
+      font-size: 1rem !important;
+    }
+
+    &-box {
+      padding: 1rem !important;
+
+      &__content {
+        h3 {
+          font-size: 0.95rem;
+        }
+
+        h5 {
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .service-item p {
+    font-size: 0.67rem !important;
+  }
+}

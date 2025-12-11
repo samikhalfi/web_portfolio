@@ -1,0 +1,387 @@
+// Keypad Component Styles
+
+// Exploding animation when data-exploded is true
+[data-exploded='true'] {
+  .intro {
+    animation: fadeOutIntro 1.6s ease-out forwards;
+  }
+
+  .intro-text {
+    animation: fadeOutBlur 0.3s ease-out forwards;
+  }
+
+  .keypad {
+    translate: calc(-50% - 1rem) 0;
+    transition-delay: 0s, 0.26s;
+    @media (max-width: 768px) {
+      translate: 0 calc(50% + 1rem);
+    }
+  }
+
+  .keypad__base {
+    --depth: 2.5;
+    translate: 0 calc(var(--depth) * 10vh);
+    transition-property: translate;
+    transition-duration: 0.52s;
+    transition-delay: 0.52s;
+    transition-timing-function: ease-out;
+    animation: explodeFadeOut 1.4s ease-out forwards;
+  }
+
+  .keypad__single {
+    --depth: -1;
+  }
+
+  .keypad__single--left {
+    --depth: -2;
+  }
+
+  .keypad__double {
+    --depth: 0;
+  }
+
+  .key {
+    translate: 0 calc(var(--depth) * 10vh);
+    transition-property: translate;
+    transition-duration: 0.52s;
+    transition-delay: 0.52s;
+    transition-timing-function: ease-out;
+    animation: explodeFadeOut 1.4s ease-out forwards;
+
+    &::after {
+      opacity: 1;
+      transition-delay: 0.52s;
+    }
+  }
+}
+
+// Intro section layout - override for keypad layout
+.intro {
+  flex-direction: row;
+  gap: 4rem;
+  flex-wrap: nowrap;
+
+  .intro-text {
+    flex: 0 1 auto;
+    max-width: 50ch;
+    transition-property: opacity, filter;
+    transition-duration: 0.26s;
+    transition-delay: 0.26s;
+    transition-timing-function: ease-out;
+
+    h2 {
+      letter-spacing: -0.05rem;
+      line-height: 1;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    gap: 2rem;
+
+    .keypad {
+      order: 1;
+    }
+    .intro-text {
+      order: 2;
+    }
+  }
+}
+
+// Keypad base styles
+:root {
+  --travel: 20;
+}
+
+.keypad {
+  position: relative;
+  aspect-ratio: 400 / 310;
+  display: flex;
+  place-items: center;
+  width: clamp(280px, 35vw, 400px);
+  flex: 0 0 auto;
+  -webkit-tap-highlight-color: transparent;
+  transition-property: translate, transform;
+  transition-duration: 0.26s;
+  transition-delay: 0.26s, 0.52s;
+  transition-timing-function: ease-out;
+  transform-style: preserve-3d;
+  opacity: 0;
+
+  // Entrance animation
+  &.keypad-enter {
+    animation: keypadSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  // Initial hidden state for keys before entrance
+  &:not(.keypad-enter) .key {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+  }
+
+  .key {
+    transform-style: preserve-3d;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    transition-property: translate;
+    transition-duration: 0.26s;
+    transition-timing-function: ease-out;
+
+    // Key entrance animations with stagger
+    .keypad-enter & {
+      animation: keyPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .keypad-enter &.keypad__single--left {
+      animation-delay: 0.2s;
+    }
+
+    .keypad-enter &.keypad__single:not(.keypad__single--left) {
+      animation-delay: 0.3s;
+    }
+
+    .keypad-enter &.keypad__double {
+      animation-delay: 0.4s;
+    }
+
+    &[data-pressed='true'],
+    &:active {
+      .key__content {
+        translate: 0 calc(var(--travel) * 1%);
+      }
+    }
+
+    &::after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      opacity: 0;
+      inset: 0;
+      transition-property: opacity;
+      transition-duration: 0.26s;
+      transition-timing-function: ease-out;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent 0 5px,
+        hsl(220, 100%, 70%) 5px 6px
+      );
+    }
+  }
+
+  .key__content {
+    width: 100%;
+    display: inline-block;
+    height: 100%;
+    transition: translate 0.12s ease-out;
+    container-type: inline-size;
+  }
+
+  .key__text {
+    height: 46%;
+    width: 86%;
+    position: absolute;
+    font-size: 12cqi;
+    z-index: 21;
+    top: 5%;
+    left: 0;
+    mix-blend-mode: normal;
+    color: hsl(0, 0%, 94%);
+    translate: 8% 10%;
+    transform: rotateX(36deg) rotateY(45deg) rotateX(-90deg) rotate(0deg);
+    text-align: left;
+    padding: 1ch;
+  }
+
+  .keypad__single {
+    position: absolute;
+    width: 40.5%;
+    left: 54%;
+    bottom: 36%;
+    height: 46%;
+    clip-path: polygon(
+      0 0,
+      54% 0,
+      89% 24%,
+      100% 70%,
+      54% 100%,
+      46% 100%,
+      0 69%,
+      12% 23%,
+      47% 0%
+    );
+    mask: url(https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86) 50% 50% / 100% 100%;
+
+    &.keypad__single--left {
+      left: 29.3%;
+      bottom: 54.2%;
+    }
+
+    .key__text {
+      width: 52%;
+      height: 62%;
+      translate: 45% -16%;
+      font-size: 18cqi;
+    }
+
+    img {
+      top: 0;
+      opacity: 1;
+      width: 96%;
+      position: absolute;
+      left: 50%;
+      translate: -50% 1%;
+    }
+  }
+
+  .key__mask {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+  }
+
+  .keypad__double {
+    position: absolute;
+    background: transparent;
+    width: 64%;
+    height: 65%;
+    left: 6%;
+    bottom: 17.85%;
+    clip-path: polygon(
+      34% 0,
+      93% 44%,
+      101% 78%,
+      71% 100%,
+      66% 100%,
+      0 52%,
+      0 44%,
+      7% 17%,
+      30% 0
+    );
+    mask: url(https://assets.codepen.io/605876/keypad-double.png?format=auto&quality=86) 50% 50% / 100% 100%;
+
+    img {
+      top: 0;
+      opacity: 1;
+      width: 99%;
+      position: absolute;
+      left: 50%;
+      translate: -50% 1%;
+    }
+  }
+
+  .key img {
+    filter: hue-rotate(calc(var(--hue, 0) * 1deg))
+      saturate(var(--saturate, 1)) brightness(var(--brightness, 1));
+  }
+
+  // Initial hidden state for base before entrance
+  &:not(.keypad-enter) .keypad__base {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  .keypad__base {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transition-property: translate;
+    transition-duration: 0.26s;
+    transition-timing-function: ease-out;
+
+    // Base entrance animation
+    .keypad-enter & {
+      animation: baseSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      animation-delay: 0.1s;
+    }
+  }
+
+  img {
+    transition: translate 0.12s ease-out;
+    width: 100%;
+  }
+}
+
+// Entrance animations
+@keyframes keypadSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) rotateX(20deg) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-10px) rotateX(-5deg) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg) scale(1);
+  }
+}
+
+@keyframes baseSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes keyPopIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.7) rotateZ(-10deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.05) rotateZ(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateZ(0deg);
+  }
+}
+
+// Exit/Explode animations
+@keyframes explodeFadeOut {
+  0% {
+    opacity: 1;
+  }
+  71% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOutBlur {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+@keyframes fadeOutIntro {
+  0% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

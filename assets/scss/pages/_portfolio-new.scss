@@ -1,0 +1,210 @@
+// Projects Section - Retro-Futuristic Terminal Cards
+.project {
+  padding: 120px 40px;
+  background: var(--bg-black);
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  // Projects Header
+  .projects-header {
+    text-align: center;
+    margin-bottom: 60px;
+
+    .projects-title {
+      h5 {
+        font-family: "Space Mono", monospace;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--text-dark);
+        margin-bottom: 16px;
+      }
+
+      h2 {
+        font-family: "Space Mono", monospace;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-light);
+        letter-spacing: 2px;
+        margin: 0;
+      }
+    }
+  }
+
+  // Projects Grid
+  .project-item-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  // Project Card
+  .project-box {
+    position: relative;
+    background: var(--bg-dark);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    border-radius: 8px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+
+    // Card number (large background)
+    &::before {
+      content: attr(data-number);
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-family: "Space Mono", monospace;
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      opacity: 0.3;
+      line-height: 1;
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    // Left accent line
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 0%;
+      background: var(--neon-green);
+      box-shadow: 0 0 10px var(--green-glow);
+      transition: height 0.3s ease;
+      z-index: 2;
+    }
+
+    // Content container
+    .project-box__content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      h3 {
+        font-family: "Space Mono", monospace;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-light);
+        margin: 0;
+        transition: color 0.3s ease;
+      }
+
+      h5 {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: var(--text-dark);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1.6;
+        margin: 0;
+
+        // Tech tag styling (spaces become visual separators)
+        word-spacing: 8px;
+      }
+    }
+
+    // Link icon
+    .project-box__link {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      z-index: 4;
+      opacity: 0;
+      transform: translateX(10px) rotate(0deg);
+      transition: all 0.3s ease;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 255, 136, 0.1);
+        border: 1px solid var(--neon-green);
+        border-radius: 50%;
+        color: var(--neon-green);
+        transition: all 0.3s ease;
+
+        ion-icon {
+          font-size: 20px;
+        }
+
+        &:hover {
+          background: var(--neon-green);
+          color: var(--bg-black);
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    // Hover Effects
+    &:hover {
+      transform: translateY(-8px);
+      border-color: var(--neon-green);
+      box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2),
+        0 0 20px rgba(0, 255, 136, 0.1);
+
+      &::before {
+        color: var(--neon-green);
+        opacity: 0.6;
+      }
+
+      &::after {
+        height: 100%;
+      }
+
+      .project-box__content h3 {
+        color: var(--neon-green);
+      }
+
+      .project-box__link {
+        opacity: 1;
+        transform: translateX(0) rotate(45deg);
+      }
+    }
+
+    // Scan line effect
+    &::after {
+      animation: none;
+    }
+  }
+
+  // Add data-number attribute via JavaScript or inline HTML
+  // Example: <div class="project-box" data-number="01">
+}
+
+// Tech Tags (if using separate pill elements)
+.tech-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: transparent;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 12px;
+  color: var(--text-dark);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+    background: rgba(0, 255, 136, 0.05);
+  }
+}

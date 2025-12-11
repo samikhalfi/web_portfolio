@@ -1,0 +1,148 @@
+// VHS Cursor Effect
+// Retro-futuristic terminal cursor with smooth lag and glitch effect
+
+// Normal cursor dot (no lag, immediate follow)
+.cursor-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon-green);
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  will-change: top, left;
+  backface-visibility: hidden;
+  box-shadow: 0 0 8px var(--green-glow);
+  transition: width 0.2s ease, height 0.2s ease;
+
+  // Hover state - slightly larger on interactive elements
+  &.active {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+// VHS effect cursor (with lag)
+.cursor-effect {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--neon-green);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  will-change: top, left;
+  backface-visibility: hidden;
+  mix-blend-mode: screen;
+
+  // Core glow effect (multiple layers for bloom)
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      var(--green-glow) 0%,
+      transparent 70%
+    );
+    opacity: 0.8;
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+
+  // Outer glow layer
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250%;
+    height: 250%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 136, 0.2) 0%,
+      transparent 70%
+    );
+    opacity: 0.5;
+  }
+
+  // Hover state - scale up on interactive elements
+  &.link-grow {
+    width: 30px;
+    height: 30px;
+    background: rgba(0, 255, 136, 0.3);
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 20px var(--green-glow), inset 0 0 10px var(--green-glow);
+    transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+
+    &::before {
+      width: 200%;
+      height: 200%;
+      opacity: 1;
+    }
+  }
+}
+
+// Glow pulse animation
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+// VHS glitch - subtle random jitters
+@keyframes vhsGlitch {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+  10% {
+    transform: translate(-50.2%, -50.1%);
+  }
+  20% {
+    transform: translate(-49.9%, -50%);
+  }
+  30% {
+    transform: translate(-50%, -49.8%);
+  }
+  40% {
+    transform: translate(-50.1%, -50.2%);
+  }
+  50% {
+    transform: translate(-50%, -50%);
+  }
+  60% {
+    transform: translate(-49.8%, -50.1%);
+  }
+  70% {
+    transform: translate(-50.2%, -49.9%);
+  }
+  80% {
+    transform: translate(-50%, -50.2%);
+  }
+  90% {
+    transform: translate(-49.9%, -49.8%);
+  }
+}
+
+// Hide on mobile/tablets (< 768px)
+@media only screen and (max-width: 768px) {
+  .cursor-dot,
+  .cursor-effect {
+    display: none;
+  }
+}

@@ -1,0 +1,111 @@
+// Header Section - Retro-Futuristic Hero
+header {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg-black);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px 40px;
+  z-index: 10;
+
+  // Hero Container - 50/50 Split
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1400px;
+    width: 100%;
+    align-items: center;
+    z-index: 10;
+    position: relative;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      text-align: center;
+    }
+  }
+
+  // Left Column: Content
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    .badge {
+      display: inline-block;
+      width: fit-content;
+      color: #a855f7;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+
+      @media (max-width: 1024px) {
+        margin: 0 auto;
+      }
+    }
+
+    .hero-title {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0;
+      color: #ffffff;
+      letter-spacing: -1px;
+    }
+
+    .hero-description {
+      margin: 0;
+      color: var(--text-medium);
+      font-size: 1rem;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+  }
+
+  // Right Column: Code Window
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @media (max-width: 1024px) {
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+
+  // Gradient overlay for smooth transition
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(10, 10, 10, 0.5) 50%,
+      var(--bg-black) 100%
+    );
+    pointer-events: none;
+    z-index: 5;
+  }
+}
+.logo img {
+  position: fixed;
+  top: 3rem;
+  left: 2rem;
+  width: 4rem;
+  background-color: rgba(var(--bg), 0.75);
+  padding: 0.3rem;
+  z-index: 101;
+  user-select: none;
+}

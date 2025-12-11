@@ -1,0 +1,50 @@
+//Variables - Retro-Futuristic Terminal Aesthetic
+html {
+  // Primary Colors
+  --neon-green: #00ff88;
+  --rich-gold: #d4af37;
+  --warm-yellow: #ffeb3b;
+
+  // Accent Colors
+  --sienna: #8b4513;
+  --saddle-brown: #a0522d;
+
+  // Background Colors
+  --bg-black: #0a0a0a;
+  --bg-dark: #121212;
+  --bg-darker: #1a1a1a;
+
+  // Text Colors
+  --text-light: #e0e0e0;
+  --text-medium: #a0a0a0;
+  --text-dark: #606060;
+
+  // Glow Effects
+  --green-glow: rgba(0, 255, 136, 0.5);
+  --gold-glow: rgba(212, 175, 55, 0.3);
+
+  // Legacy variable support (mapped to new palette)
+  --mainColor: var(--neon-green);
+  --secondColor: var(--rich-gold);
+  --thirdColor: var(--bg-darker);
+  --pink: #fb839e;
+  --green-alt: var(--neon-green);
+  --purple: #8a49ff;
+  --bg: var(--bg-black);
+  --darkBlue: var(--bg-dark);
+  --white: var(--text-light);
+  --whiteLight: var(--text-medium);
+
+  // Component-specific colors
+  --footerOverlay: rgba(10, 10, 10, 0.95);
+  --footerCardBg: rgba(18, 18, 18, 0.8);
+  --footerCardBorder: rgba(0, 255, 136, 0.1);
+  --footerSocialBg: rgba(18, 18, 18, 0.8);
+  --footerSocialBgHover: var(--neon-green);
+  --introBg: var(--bg-black);
+  --introGrid: rgba(0, 255, 136, 0.3);
+  --sliderBg: var(--bg-darker);
+  --gradientStart: var(--neon-green);
+  --gradientMid: var(--rich-gold);
+  --gradientEnd: var(--warm-yellow);
+}

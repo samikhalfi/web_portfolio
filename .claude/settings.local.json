@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sass:*)",
+      "Bash(findstr:*)",
+      "Bash(npx sass:*)",
+      "Bash(where:*)",
+      "Bash(dir:*)",
+      "Bash(ls:*)",
+      "Bash(git config:*)"
+    ]
+  }
+}

@@ -1,0 +1,202 @@
+//Global styling
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+::before,
+::after {
+  box-sizing: border-box;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--white);
+  font-weight: 600;
+}
+body {
+  font-size: 10px;
+  line-height: 1.6;
+  letter-spacing: 1px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  color: var(--white);
+  min-height: 100vh;
+  max-width: 100%;
+  background: var(--bg);
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  position: relative;
+  cursor: none;
+
+  &::before {
+    --size: 45px;
+    --line: rgba(255, 255, 255, 0.08);
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: linear-gradient(
+          90deg,
+          var(--line) 1px,
+          transparent 1px var(--size)
+        )
+        calc(var(--size) * 0.36) 50% / var(--size) var(--size),
+      linear-gradient(var(--line) 1px, transparent 1px var(--size)) 0%
+        calc(var(--size) * 0.32) / var(--size) var(--size);
+    mask-image:
+      radial-gradient(ellipse 100% 100% at 100% 0%, transparent 0%, white 30%, white 100%),
+      radial-gradient(ellipse 100% 100% at 0% 100%, transparent 0%, white 20%, white 100%);
+    mask-composite: intersect;
+    -webkit-mask-image:
+      radial-gradient(ellipse 100% 100% at 100% 0%, transparent 0%, white 30%, white 100%),
+      radial-gradient(ellipse 100% 100% at 0% 100%, transparent 0%, white 20%, white 100%);
+    -webkit-mask-composite: source-in;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+html[data-theme="light"] body::before {
+  --line: rgba(0, 0, 0, 0.08);
+}
+
+a {
+  text-decoration: none;
+  color: var(--secondColor);
+  cursor: crosshair;
+}
+img {
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+.container {
+  margin: auto;
+  width: 100%;
+  max-width: 1480px;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  transform: translateY(100%);
+}
+
+header {
+  position: relative;
+  z-index: 10;
+}
+
+.landing-text {
+  position: absolute;
+  bottom: 15%;
+  left: 5%;
+  max-width: 600px;
+  z-index: 50;
+  opacity: 0;
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  p, h5 {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+
+    i {
+      color: var(--neon-green);
+      font-style: italic;
+    }
+  }
+
+  @media (max-width: 768px) {
+    bottom: 10%;
+    left: 2rem;
+    right: 2rem;
+    max-width: none;
+  }
+}
+
+.logo-repositioned {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  width: 60px;
+  height: 60px;
+  z-index: 50;
+  opacity: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.intro__logo {
+  margin-bottom: 2rem;
+  opacity: 0;
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+// Simple Portfolio Logo Icon
+.simple-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin-right: 60px;
+
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 60px;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  i {
+    font-size: 60px;
+    color: var(--text-light);
+
+    @media (max-width: 768px) {
+      font-size: 45px;
+    }
+  }
+}
+
+button {
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+//Section styling
+
+section {
+  padding: 15rem 0;
+}
+
+.section-title {
+  padding: 0 15px;
+  width: 100%;
+  margin-bottom: 40px;
+  h2 {
+    text-align: center;
+    font-size: 40px;
+  }
+}

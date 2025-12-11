@@ -1,0 +1,19 @@
+# Environment files
+.env
+.env.local
+.dev.vars
+
+# Cloudflare Workers
+.wrangler/
+wrangler.toml.backup
+
+# Node modules
+node_modules/
+
+# Build files
+*.log
+.DS_Store
+
+# Sensitive - DO NOT COMMIT
+# If you accidentally committed your API key, revoke it immediately at:
+# https://aistudio.google.com/app/apikey
