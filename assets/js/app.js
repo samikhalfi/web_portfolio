@@ -604,11 +604,12 @@ BACKGROUND:
 - GitHub: @samikhalfi | LinkedIn: linkedin.com/in/samikhalfi
 - Coffee consumption: Professionally high ☕
 
-CURRENT EXPERIENCE:
-• AI Engineer at 4D Software (Feb 2025-Jun 2025)
-  - Building QodlyCoder: AI-powered component generator using LangGraph
-  - Teaching machines to write code so I can drink more coffee
-  - Working with modern AI frameworks and LLM integration
+CURRENT WORK:
+• Freelance AI Engineer (July 2025 - Present)
+  - Developing NLP pipelines and LLM solutions for clients
+  - Designing multi-agent architectures for complex task automation
+  - Process automation via n8n, Zapier, and custom API integrations
+  - Building intelligent workflows for B2B operations optimization
 
 PREVIOUS EXPERIENCE:
 • Data Engineer at Indegate Consulting (Aug 2023-Oct 2024)
@@ -766,10 +767,11 @@ Or just ask me anything! I'm powered by Google's Gemini 2.5 Flash Lite ⚡🤖`;
     case 'about':
       return `Sami Khalfi - AI Engineer & Data Scientist 🇲🇦
 
-Currently: AI Engineer at 4D Software (Building QodlyCoder)
-- Teaching machines to write code (so I can drink more coffee ☕)
+Currently: Freelance AI Engineer
+- Building intelligent solutions with LLMs and multi-agent systems
 - Specializing in LangGraph, PyTorch, Hugging Face Transformers
-- Making AI do the boring stuff so humans can do the fun stuff
+- Automating workflows and processes for businesses
+- Making AI do the boring stuff so humans can do the fun stuff ☕
 
 Education: Engineering degree in Knowledge Engineering & Data Science
            École des sciences de l'information (ESI Rabat), 2022-2025

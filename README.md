@@ -23,7 +23,7 @@
 ## 📧 Contact
 
 - **Email**: samikhalfi2003@gmail.com
-- **LinkedIn**: [linkedin.com/in/samikhalfi](https://www.linkedin.com/in/samikhalfi/)
+- **LinkedIn**: [linkedin.com/in/sami-khalfi-355098290](https://www.linkedin.com/in/sami-khalfi-355098290/)
 - **GitHub**: [@samikhalfi](https://github.com/samikhalfi)
 
 ## 🔒 Security Note

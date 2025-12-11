@@ -7,7 +7,7 @@
 **Location:** Casablanca, Morocco  
 **Email:** samikhalfi2003@gmail.com  
 **Phone:** +212-722-227-916  
-**LinkedIn:** [samikhalfi](https://linkedin.com/in/samikhalfi)  
+**LinkedIn:** [sami-khalfi-355098290](https://linkedin.com/in/sami-khalfi-355098290)  
 **GitHub:** [samikhalfi](https://github.com/samikhalfi)
 
 ---
