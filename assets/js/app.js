@@ -568,8 +568,7 @@ window.addEventListener('scroll', () => {
 });
 
 // Cloudflare Worker API Configuration
-// Replace this URL with your deployed Cloudflare Worker URL after deployment
-const WORKER_API_URL = 'https://portfolio-gemini-proxy.YOUR_SUBDOMAIN.workers.dev';
+const WORKER_API_URL = 'https://portfolio-gemini-proxy.samikhalfi.workers.dev';
 
 // Knowledge Base (will be loaded from file)
 let knowledgeBase = '';
