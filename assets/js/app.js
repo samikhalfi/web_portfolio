@@ -126,30 +126,7 @@ for (const id of ids) {
 }
 
 // Handle the key bindings
-let firstKeyInteraction = true;
 window.addEventListener('keydown', (event) => {
-  // Fade in terminal icon instantly on first keyboard interaction, show for 3s, then fade out
-  if (firstKeyInteraction) {
-    const introLogo = document.querySelector('.intro__logo');
-    if (introLogo) {
-      // Instant fade in
-      gsap.to(introLogo, {
-        opacity: 1,
-        duration: 0.1,
-        onComplete: () => {
-          // After 1 second, fade out
-          setTimeout(() => {
-            gsap.to(introLogo, {
-              opacity: 0,
-              duration: 0.5
-            });
-          }, 1000);
-        }
-      });
-    }
-    firstKeyInteraction = false;
-  }
-
   for (const id of ids) {
     if (config[id].buttonElement && event.key === config[id].key) {
       config[id].buttonElement.dataset.pressed = true

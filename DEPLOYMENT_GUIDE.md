@@ -4,7 +4,7 @@ This guide will help you deploy your portfolio with a secure Cloudflare Worker t
 
 ## ✅ What You Need
 
-1. A Cloudflare account (free) - [Sign up here](https://dash.cloudflare.com/sign-up)
+1. A Cloudflare account (free) - [Sign up here](   )
 2. Node.js installed on your computer
 3. Your Gemini API key: `AIzaSyBq8toKoQjJldg1PDaVhKWxIBHswzVcZ3w`
 
