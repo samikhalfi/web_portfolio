@@ -16,7 +16,8 @@
       "Bash(node --version:*)",
       "Bash(npm --version:*)",
       "Bash(git pull:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(wrangler secret put:*)"
     ]
   }
 }
