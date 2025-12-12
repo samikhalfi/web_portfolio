@@ -6,7 +6,7 @@ This guide will help you deploy your portfolio with a secure Cloudflare Worker t
 
 1. A Cloudflare account (free) - [Sign up here](   )
 2. Node.js installed on your computer
-3. Your Gemini API key: `AIzaSyBq8toKoQjJldg1PDaVhKWxIBHswzVcZ3w`
+3. Your Gemini API key: `------------------------------------`
 
 ---
 
