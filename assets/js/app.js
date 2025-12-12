@@ -507,11 +507,8 @@ setTimeout(function() {
   const pupils = document.querySelectorAll('.pupil');
 
   if (pupils.length === 0) {
-    console.error('❌ No pupils found in footer!');
     return;
   }
-
-  console.log(`✅ Found ${pupils.length} pupils - Eye tracking active!`);
 
   // Track mouse movement and update pupil positions
   document.addEventListener('mousemove', function(e) {
@@ -540,8 +537,6 @@ setTimeout(function() {
       pupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
   });
-
-  console.log('👁️ Eye tracking listener attached successfully!');
 }, 2000); // Wait 2 seconds for DOM to be fully ready
 
 /////Terminal AI Chat Assistant with Groq Integration
@@ -579,14 +574,11 @@ async function loadKnowledgeBase() {
     const response = await fetch('assets/data/knowledge-base.md');
     if (response.ok) {
       knowledgeBase = await response.text();
-      console.log('✅ Knowledge base loaded successfully!');
       // Reinitialize conversation with updated system prompt
       initializeConversation();
-    } else {
-      console.warn('⚠️ Knowledge base not found, using basic context');
     }
   } catch (error) {
-    console.warn('⚠️ Could not load knowledge base:', error.message);
+    // Knowledge base loading failed, using basic context
   }
 }
 
@@ -721,7 +713,6 @@ function initializeConversation() {
   conversationHistory = [
     { role: 'system', content: getSystemPrompt() }
   ];
-  console.log('💬 Conversation initialized with', knowledgeBase ? 'enhanced' : 'base', 'system prompt');
 }
 
 // Conversation history for context
